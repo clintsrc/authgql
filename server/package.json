@@ -4,7 +4,8 @@
   "main": "server/server.js",
   "scripts": {
     "build": "npx tsc",
-    "dev": "npx nodemon dist/server.js",
+    "dev": "concurrently \"npm run watch\" \"nodemon dist/server.js\"",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production npm run build && node dist/server.js"
   },

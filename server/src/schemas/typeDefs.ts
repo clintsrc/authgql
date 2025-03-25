@@ -13,8 +13,6 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    bookCount: Int
-    savedBooks: [Book]!
   }
 
   input UserInput {
@@ -35,12 +33,13 @@ const typeDefs = `
   }
 
   ##############  Mutations
-  
-  # Add a new user (signup)
-  addUser(input: UserInput!): Auth
+  type Mutation {
+    # Add a new user (signup)
+    addUser(input: UserInput!): Auth
 
-  # Login user and return JWT token (signin)
-  loginUser(email: String!, password: String!): Auth
+    # Login user and return JWT token (signin)
+    loginUser(email: String!, password: String!): Auth
+  }
 `;
 
 export default typeDefs;

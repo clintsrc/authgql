@@ -9,4 +9,7 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.node } },
   { files: ["**/*.{js,mjs,cjs,ts}"], plugins: { js }, extends: ["js/recommended"] },
   tseslint.configs.recommended,
+  {
+    ignores: ["dist/", "node_modules/"],
+  },
 ]);

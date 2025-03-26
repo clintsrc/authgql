@@ -7,6 +7,8 @@
     "cleanall": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
     "install": "cd server && npm ci && cd ../client && npm ci",
+    "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
+    "lint:fix": "concurrently \"cd server && npm run lint:fix\" \"cd client && npm run lint:fix\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     "client:dev": "cd client && npm run dev",

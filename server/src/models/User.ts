@@ -4,9 +4,6 @@
  * Defines interfaces, schemas, virtual functions, getters and setters
  * Compiles the User model from the schema
  *
- * Each user's savedBooks is a subdocument embedded directly inside their UserDocument
- * for a one-to-many relationship
- *
  */
 
 import { Schema, model, type Document } from "mongoose";
@@ -18,7 +15,6 @@ export interface UserDocument extends Document {
   email: string;
   password: string;
   isCorrectPassword(password: string): Promise<boolean>;
-  bookCount: number;
 }
 
 const userSchema = new Schema<UserDocument>(

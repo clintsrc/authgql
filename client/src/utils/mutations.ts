@@ -5,7 +5,6 @@
  *  delete actions
  *
  * Provides GraphQL mutations for managing users (signup and login)
- *  and their saved books list.
  *
  */
 
@@ -36,39 +35,6 @@ export const LOGIN_USER = gql`
         _id
         username
         email
-      }
-    }
-  }
-`;
-
-/**
- * Book data management
- */
-export const SAVE_BOOK = gql`
-  mutation saveBook($bookInput: BookInput!) {
-    saveBook(input: $bookInput) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        title
-        authors
-        description
-        image
-        link
-      }
-    }
-  }
-`;
-
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
-      _id
-      username
-      savedBooks {
-        bookId
       }
     }
   }

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
+    "clean": "rimraf dist",
     "build": "npx tsc",
     "dev": "concurrently \"npm run watch\" \"nodemon dist/server.js\"",
     "watch": "tsc --watch",
@@ -35,6 +36,7 @@
     "eslint": "^9.23.0",
     "globals": "^16.0.0",
     "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.27.0"

@@ -3,7 +3,7 @@
  *
  * Defines the queries for the GraphQL API.
  *
- * Retrieve user data including the associated list of saved books
+ * Retrieve user data
  *
  */
 
@@ -23,14 +23,6 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      savedBooks {
-        bookId
-        title
-        authors
-        description
-        image
-        link
-      }
     }
   }
 `;
@@ -49,14 +41,6 @@ export const GET_ME = gql`
       _id
       username
       email
-      savedBooks {
-        bookId
-        title
-        authors
-        description
-        image
-        link
-      }
     }
   }
 `;

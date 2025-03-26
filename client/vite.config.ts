@@ -8,7 +8,11 @@ export default defineConfig({
     port: 3000,   // note: client listens on 5173 by default
     open: true,   // automatically open the browser to the url on start
     proxy: {
-      '/api': 'http://localhost:3001',
+      "/graphql": { // graphql endpoint rules
+        target: "http://localhost:3001",  // backend's port
+        secure: false,
+        changeOrigin: true,
+      },
     },
   },
 })

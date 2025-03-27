@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production npm run build && node dist/server.js"
+    "start": "echo NODE_ENV=%NODE_ENV% && node dist/server.js"
   },
   "keywords": [],
   "author": "",

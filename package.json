@@ -12,6 +12,7 @@
     "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
     "lint:fix": "concurrently \"cd server && npm run lint:fix\" \"cd client && npm run lint:fix\"",
     "server:dev": "cd server && npm run dev",
+    "start": "cd server && npm run start",
     "test": "concurrently \"npm run test:component\" \"npm run test:e2e\"",
     "test:component": "cypress run --component",
     "test:e2e": "cypress run --e2e",

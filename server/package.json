@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server/server.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npx tsc",

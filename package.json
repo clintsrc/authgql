@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "throwaway repo for graphql and authentication review",
   "main": "server/server.js",
+  "type": "module",
   "scripts": {
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
     "cleanall": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",

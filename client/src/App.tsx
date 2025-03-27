@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/*
+ * React App
+ *
+ * Set up Apollo Client to handle authentication middleware.
+ *
+ * The middleware checks for the JWT (JSON Web Token) in the client's localStorage
+ * and attaches it to the request headers.
+ *
+ */
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+import Navbar from "./components/Navbar";
+
+// Define the GraphQL API endpoint
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+/*
+ * The 'authLink' middleware tries to read the JWT token from localStorage.
+ * If the token exists, it adds it to the request headers as an 'authorization' header.
+ * Othwerwise, no 'authorization' header is added to the request.
+ */
+const authLink = setContext((_, { headers }) => {
+  // Try to  read the authentication token from localStorage
+  const token = localStorage.getItem("id_token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+/*
+ * The Apollo Client combines the 'authLink' middleware (for attaching the token)
+ * with the 'httpLink' (for sending the request to the GraphQL API).
+ */
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ApolloProvider client={client}>
+      <Navbar />
+      <Outlet />
+    </ApolloProvider>
+  );
 }
 
-export default App
+export default App;

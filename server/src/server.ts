@@ -2,7 +2,7 @@
  * MERN Server (Entry Point)
  *
  * Connects to MongoDB and exposes GraphQL API endpoints.
- * Allows users to create accounts, authenticate via JWT, and manage their booklist.
+ * Allows users to create accounts, authenticate via JWT.
  * Configures an Express server that hosts an Apollo GraphQL API to interact with the
  *  database.
  *

@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,   // note: client listens on 5173 by default
-    open: true,   // automatically open the browser to the url on start
+    open: false,   // automatically open the browser to the url on start
     proxy: {
       "/graphql": { // graphql endpoint rules
         target: "http://localhost:3001",  // backend's port
@@ -16,3 +16,4 @@ export default defineConfig({
     },
   },
 })
+console.log("vite.config.js");

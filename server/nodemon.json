@@ -1,15 +1,12 @@
 {
   "watch": [
-    "src/server.ts",
-    "src/config",
-    "src/controllers",
-    "src/models",
-    "src/routes",
-    "src/seeds",
-    "dist"
+    "client/src",
+    "server/src",
+    "package.json",
+    "tsconfig.json"
   ],
-  "ext": "ts,json",
-  "ignore": ["node_modules"],
+  "ext": "ts,json,js,html",
+  "ignore": ["node_modules", "dist"],
   "execMap": {
     "ts": "ts-node"
   },

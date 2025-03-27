@@ -24,6 +24,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import db from "./config/connection.js";
 
+// Ensure JWT_SECRET_KEY is set
+if (!process.env.JWT_SECRET_KEY) {
+  console.error("Error: JWT_SECRET_KEY is not set.");
+  process.exit(1);
+}
+
 // Create an Apollo Server specifying the API schema, queries, and mutations
 const server = new ApolloServer({
   typeDefs,

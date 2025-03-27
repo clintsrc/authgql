@@ -4,21 +4,31 @@
   "description": "throwaway repo for graphql and authentication review",
   "main": "server/server.js",
   "scripts": {
-    "cleanall": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
+    "cleanall": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",
+    "client:dev": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     "install": "cd server && npm ci && cd ../client && npm ci",
     "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
     "lint:fix": "concurrently \"cd server && npm run lint:fix\" \"cd client && npm run lint:fix\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
-    "client:dev": "cd client && npm run dev",
-    "server:dev": "cd server && npm run dev"
+    "server:dev": "cd server && npm run dev",
+    "test": "concurrently \"npm run test:component\" \"npm run test:e2e\"",
+    "test:component": "cypress run --component",
+    "test:e2e": "cypress run --e2e",
+    "test:gui": "cypress open --detached"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "cypress": "^14.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vite": "^6.2.3",
     "wait-on": "^8.0.3"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4"
   }
 }

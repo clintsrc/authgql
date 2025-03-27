@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server/server.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npx tsc",
@@ -10,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production npm run build && node dist/server.js"
+    "start": "echo $NODE_ENV && node dist/server.js"
   },
   "keywords": [],
   "author": "",

@@ -4,14 +4,15 @@
   "main": "server/server.js",
   "type": "module",
   "scripts": {
-    "clean": "rimraf dist",
     "build": "npx tsc",
+    "clean": "rimraf dist",
+    "cleanall": "npm ci && npm run clean",
     "dev": "concurrently \"npm run watch\" \"nodemon dist/server.js\"",
-    "watch": "tsc --watch",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "start": "echo $NODE_ENV && node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "echo $NODE_ENV && node dist/server.js"
+    "watch": "tsc --watch"
   },
   "keywords": [],
   "author": "",

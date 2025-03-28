@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "clean": "rimraf dist",
-    "dev": "vite",
     "build": "tsc -b && vite build",
+    "clean": "rimraf dist",
+    "cleanall": "npm ci && npm run clean",
+    "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "preview": "vite preview"

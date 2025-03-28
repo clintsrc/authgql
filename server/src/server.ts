@@ -11,22 +11,22 @@
  *
  */
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config(); // check the env for PORT
 
-import { typeDefs, resolvers } from "./schemas/index.js";
-import { authenticateToken } from "./utils/auth.js";
-import type { Request, Response } from "express";
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
-import express from "express";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import db from "./config/connection.js";
+import { typeDefs, resolvers } from './schemas/index.js';
+import { authenticateToken } from './utils/auth.js';
+import type { Request, Response } from 'express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import express from 'express';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import db from './config/connection.js';
 
 // Ensure JWT_SECRET_KEY is set
 if (!process.env.JWT_SECRET_KEY) {
-  console.error("Error: JWT_SECRET_KEY is not set.");
+  console.error('Error: JWT_SECRET_KEY is not set.');
   process.exit(1);
 }
 
@@ -52,7 +52,7 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   app.use(
-    "/graphql",
+    '/graphql',
     expressMiddleware(server, {
       context: ({ req }) => authenticateToken({ req }),
     })
@@ -62,8 +62,8 @@ const startApolloServer = async () => {
    * In production, serve the built 'client/dist' content as a static asset.
    * In development mode, Vite serves the client.
    */
-  if (process.env.NODE_ENV === "production") {
-    console.log("Serving in production mode");
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Serving in production mode');
 
     // Manually define __dirname in ES modules
     // get the full path to this running server module
@@ -71,11 +71,11 @@ const startApolloServer = async () => {
     // get the directory of the running module
     const __dirname = path.dirname(__filename);
     // point to the static client build
-    app.use(express.static(path.join(__dirname, "../../client/dist")));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
 
     // Redirect all unspecified routes to the index page (SPA fallback)
-    app.get("*", (_req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+    app.get('*', (_req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
 

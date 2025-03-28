@@ -1,5 +1,5 @@
 {
-  //"extends": "../tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "ES2020",
     "lib": ["ES2020", "DOM"],
@@ -9,19 +9,8 @@
     "noEmit": true,
     "composite": true,
     "jsx": "react-jsx",
-    "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "paths": {
-      "cypress/react": ["./node_modules/@cypress/react"]
-    }
+    "strict": true
   },
   /* Be sure to include the path to the components being tested */
-  "include": [
-    "**/*.tsx",
-    "**/*.ts",
-    "**/*.js",
-    "**/*.jsx",
-    "../client/src/components/**/*.tsx"
-  ]
+  "include": ["**/*.tsx", "**/*.ts", "**/*.js", "**/*.jsx", "../client/src/components/**/*.tsx"]
 }

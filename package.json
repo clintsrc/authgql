@@ -13,6 +13,7 @@
     "install": "cd server && npm ci && cd ../client && npm ci",
     "lint": "concurrently \"cd server && npm run lint\" \"cd client && npm run lint\"",
     "lint:fix": "concurrently \"cd server && npm run lint:fix\" \"cd client && npm run lint:fix\"",
+    "seed": "cd server && npm run seed",
     "server:dev": "cd server && npm run dev",
     "start": "cd server && npm run start",
     "test": "concurrently \"npm run test:comp\" \"npm run test:e2e\"",

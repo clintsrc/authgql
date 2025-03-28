@@ -7,7 +7,7 @@
  *
  */
 
-import User from '../models/User.js';
+import { User } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js';
 
 // Define interfaces for mutation arguments

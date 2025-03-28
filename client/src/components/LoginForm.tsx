@@ -86,6 +86,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
         <Form.Group className="mb-3">
           <Form.Label htmlFor="email">Email</Form.Label>
           <Form.Control
+            data-testid="email"
             type="text"
             placeholder="Your email"
             name="email"
@@ -101,6 +102,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
         <Form.Group className="mb-3">
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
+            data-testid="password"
             type="password"
             placeholder="Your password"
             name="password"
@@ -114,6 +116,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
         </Form.Group>
         <Button
           disabled={!(userFormData.email && userFormData.password)}
+          data-testid="submit"
           type="submit"
           variant="success"
         >

@@ -39,5 +39,25 @@ describe("<SignupForm />", () => {
     cy.get("input[name='email']").type("test@test.com");
     cy.get("input[name='password']").type("test");
     cy.get("button[type='submit']").should('be.visible');
+
+    cy.findByPlaceholderText(/your username/i)
+      .should("be.visible")
+      .should('be.enabled')
+      .type("test");
+
+    cy.findByPlaceholderText(/your email address/i)
+      .should("be.visible")
+      .should('be.enabled')
+      .type("test@test.com");
+
+    cy.findByPlaceholderText(/your password/i)
+      .should("be.visible")
+      .should('be.enabled')
+      .type("test");
+
+    cy.findByText(/submit/i)
+      .should("be.visible")
+      .should('be.enabled')
+      .click()
   });
 });

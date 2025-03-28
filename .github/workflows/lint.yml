@@ -1,0 +1,42 @@
+#
+# Deploy Check
+#
+# Executes for any PR or Merge pull request to the main branch. PR changes don't
+# currently do anything, but it is extensible for adding final pre-release actions
+# or tests like linting.
+#
+# Executes a deployment to Render for Merge pull request (push) actions to the main
+# branch.
+#
+# The script can be monitored on a pull request's Checks tab
+#
+name: Lint
+
+on:
+  # catch lint errors applied to a branch
+  push:
+    branches:
+      - '**'
+  # catch any attempts to merge branches that have lint errors
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint

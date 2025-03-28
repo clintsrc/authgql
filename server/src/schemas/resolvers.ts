@@ -7,8 +7,8 @@
  *
  */
 
-import User from "../models/User.js";
-import { signToken, AuthenticationError } from "../utils/auth.js";
+import User from '../models/User.js';
+import { signToken, AuthenticationError } from '../utils/auth.js';
 
 // Define interfaces for mutation arguments
 
@@ -48,19 +48,19 @@ const resolvers = {
   Query: {
     // return the user's information
     user: async (_parent: unknown, { username }: UserArgs) => {
-      console.log("user Received input:", username);
+      console.log('user Received input:', username);
       return User.findOne({ username });
     },
 
     // Get the authenticated user's information from the context payload
     me: async (_parent: unknown, _args: unknown, context: Context) => {
       /* If the user is authenticated, find their user information */
-      console.log("me Received for user:", context.user?._id);
+      console.log('me Received for user:', context.user?._id);
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
       // If the user is not authenticated, throw an AuthenticationError
-      throw new AuthenticationError("Could not authenticate user.");
+      throw new AuthenticationError('Could not authenticate user.');
     },
   },
 
@@ -70,7 +70,7 @@ const resolvers = {
   Mutation: {
     // Create a new user and return a token (signup)
     addUser: async (_parent: unknown, { input }: AddUserArgs) => {
-      console.log("addUser Received input:", input.email);
+      console.log('addUser Received input:', input.email);
       try {
         // Create a new user with the provided username, email, and password
         const user = await User.create({ ...input });
@@ -87,14 +87,14 @@ const resolvers = {
 
     // Login user and return a token (signin)
     loginUser: async (_parent: unknown, { email, password }: LoginUserArgs) => {
-      console.log("loginUser Received input for:", email);
+      console.log('loginUser Received input for:', email);
       try {
         // Find a user with the provided email
         const user = await User.findOne({ email });
 
         // If no user is found, throw an AuthenticationError
         if (!user) {
-          throw new AuthenticationError("Could not authenticate user.");
+          throw new AuthenticationError('Could not authenticate user.');
         }
 
         // Check if the provided password is correct
@@ -102,7 +102,7 @@ const resolvers = {
 
         // If the password is incorrect, throw an AuthenticationError
         if (!correctPw) {
-          throw new AuthenticationError("Could not authenticate user.");
+          throw new AuthenticationError('Could not authenticate user.');
         }
 
         // Sign a token with the user's information

@@ -6,8 +6,8 @@
  *
  */
 
-import { Schema, model, type Document } from "mongoose";
-import bcrypt from "bcrypt";
+import { Schema, model, type Document } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export interface UserDocument extends Document {
   id: string;
@@ -28,7 +28,7 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, "Must use a valid email address"],
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
@@ -44,8 +44,8 @@ const userSchema = new Schema<UserDocument>(
 );
 
 // hash user password
-userSchema.pre("save", async function (next) {
-  if (this.isNew || this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -58,6 +58,6 @@ userSchema.methods.isCorrectPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = model<UserDocument>("User", userSchema);
+const User = model<UserDocument>('User', userSchema);
 
 export default User;

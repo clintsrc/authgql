@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "cleanall": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",
+    "clean": "concurrently \"cd server && npm run clean\" \"cd client && npm run clean\"",
+    "cleanall": "concurrently \"cd server && npm run cleanall\" \"cd client && npm run cleanall\"",
     "client:dev": "cd client && npm run dev",
     "dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     "install": "cd server && npm ci && cd ../client && npm ci",

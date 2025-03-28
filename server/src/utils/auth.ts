@@ -13,10 +13,10 @@
  *
  */
 
-import jwt from "jsonwebtoken";
-import { GraphQLError } from "graphql";
-import dotenv from "dotenv";
-import { Request } from "express";
+import jwt from 'jsonwebtoken';
+import { GraphQLError } from 'graphql';
+import dotenv from 'dotenv';
+import { Request } from 'express';
 
 dotenv.config(); // Load environment variables
 
@@ -53,7 +53,7 @@ export const authenticateToken = async ({ req }: { req: Request }): Promise<Base
 
   // If the token is sent in the authorization header, extract the token from the header
   if (req.headers.authorization) {
-    token = token.split(" ").pop()?.trim();
+    token = token.split(' ').pop()?.trim();
   }
 
   // If no token is provided, return an empty object
@@ -63,22 +63,22 @@ export const authenticateToken = async ({ req }: { req: Request }): Promise<Base
 
   try {
     // Verify the token and ensure that it's a JwtPayload (not a string)
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY || "", {
-      maxAge: "2h", // Token expiration time
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY || '', {
+      maxAge: '2h', // Token expiration time
     });
 
     // Check if the decoded value is an object with the expected structure
-    if (typeof decoded === "object" && "data" in decoded) {
+    if (typeof decoded === 'object' && 'data' in decoded) {
       const { data } = decoded as { data: JWTUserData };
       return { user: data };
     }
 
     // If the token doesn't contain expected data, return an empty object
-    console.log("Token does not contain expected data.");
+    console.log('Token does not contain expected data.');
     return {};
 
   } catch (err) {
-    console.error("Invalid token", err);
+    console.error('Invalid token', err);
     return {}; // Return an empty object if there's an error with the token
   }
 };
@@ -95,10 +95,10 @@ export const authenticateToken = async ({ req }: { req: Request }): Promise<Base
 export const signToken = (username: string, email: string, _id: unknown): string => {
   // Create a payload with the user information
   const payload = { username, email, _id };
-  const secretKey: string = process.env.JWT_SECRET_KEY || ""; // Get the secret key from environment variables
+  const secretKey: string = process.env.JWT_SECRET_KEY || ''; // Get the secret key from environment variables
 
   // Sign the token with the payload and secret key, and set it to expire in 2 hours
-  return jwt.sign({ data: payload }, secretKey, { expiresIn: "2h" });
+  return jwt.sign({ data: payload }, secretKey, { expiresIn: '2h' });
 };
 
 /*
@@ -109,7 +109,7 @@ export const signToken = (username: string, email: string, _id: unknown): string
  */
 export class AuthenticationError extends GraphQLError {
   constructor(message: string) {
-    super(message, undefined, undefined, undefined, ["UNAUTHENTICATED"]);
-    Object.defineProperty(this, "name", { value: "AuthenticationError" });
+    super(message, undefined, undefined, undefined, ['UNAUTHENTICATED']);
+    Object.defineProperty(this, 'name', { value: 'AuthenticationError' });
   }
 }

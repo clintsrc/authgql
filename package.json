@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@apollo/client": "^3.13.5",
     "@cypress/react": "^9.0.1",
     "@testing-library/cypress": "^10.0.3",
     "concurrently": "^9.1.2",

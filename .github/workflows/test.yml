@@ -36,13 +36,8 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Run the server
-        env:
-          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-        run: npm run dev & # Background the server process
-
-      - name: Run Cypress tests
-        run: npm run test
+      - name: Run Cypress component tests
+        run: npm run test:comp
         continue-on-error: true # Continue on in order to report failed tests
 
       # Save the downloadable reports artifact for any further investigation

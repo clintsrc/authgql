@@ -40,7 +40,7 @@ jobs:
         run: npm run develop &  # Background the server process
 
       - name: Run Cypress tests
-        run: npm run test:comp
+        run: npm run test
         continue-on-error: true  # Continue on in order to report failed tests
 
       # Save the downloadable reports artifact for any further investigation

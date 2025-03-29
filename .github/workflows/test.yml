@@ -11,7 +11,7 @@
 #   https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
 #   https://emojipedia.org/
 #
-name: Run Tests
+name: Run Component Tests
 
 on:
   # Trigger for any pull request activity on the develop branch (create, update)

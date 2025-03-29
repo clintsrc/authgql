@@ -1,7 +1,8 @@
 name: Cypress E2E Tests
 
 on:
-  push:
+  # Trigger for any pull request activity on the develop branch (create, update)
+  pull_request:
     branches:
       - develop
 

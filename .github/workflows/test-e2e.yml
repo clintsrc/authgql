@@ -12,19 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Compile TypeScript (if necessary)
-        run: npm run build # Ensure TypeScript is compiled, adjust if using another bundler like Vite
+      - name: Run build
+        run: npm run build
 
       - name: Start the client (port 3000)
         run: npm run dev -- --port 3000 & # Start the Vite client in the background

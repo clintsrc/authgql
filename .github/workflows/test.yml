@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: Run the server
-        run: npm run develop &  # Background the server process
+        run: npm run dev &  # Background the server process
 
       - name: Run Cypress tests
         run: npm run test

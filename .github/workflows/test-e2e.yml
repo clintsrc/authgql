@@ -22,12 +22,9 @@ jobs:
         run: npm run build
 
       - name: Start the client (port 3000)
-        run: npm run dev -- --port 3000 & # Start the Vite client in the background
-
-      - name: Start the server (port 3001)
         env:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-        run: npm run server -- --port 3001 & # Start the server in the background
+        run: npm run dev & # Start the app in the background
 
       - name: Wait for server and client to be ready
         run: |

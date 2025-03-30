@@ -35,12 +35,12 @@ jobs:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
         run: npm run start & # Start the server in the background
 
-      - name: Wait for server and client to be ready
-        run: |
-          # You might want to wait for the server and client to be fully up before running tests
-          # For example, use a small delay or a tool like `wait-on`
-          npx wait-on http://localhost:3000
-          npx wait-on http://localhost:3001
+      # - name: Wait for server and client to be ready
+      #   run: |
+      #     # You might want to wait for the server and client to be fully up before running tests
+      #     # For example, use a small delay or a tool like `wait-on`
+      #     npx wait-on http://localhost:3000
+      #     npx wait-on http://localhost:3001
 
       - name: Run Cypress E2E tests
         run: npx cypress run --e2e --headless  # Run E2E tests in headless mode

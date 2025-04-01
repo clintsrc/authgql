@@ -19,6 +19,12 @@ on:
     branches:
       - develop
 
+concurrency:
+  # Filtering on the current branch ref helps avoid concurrency
+  group: ${{ github.ref }}
+  # Cancel running lint jobs
+  cancel-in-progress: true
+
 jobs:
   cypress-run:
     # This name should be added to GitHub's 'specific checks' branch protection config
@@ -33,11 +39,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run build
+      - name: Compile
+        # TypeScript transpile
         run: npm run build
 
       - name: Run Cypress component tests
         run: npm run test:comp
+        continue-on-error: true # Continue on in order to report failed tests
+
+      - name: Start the client
+        run: npm run client:dev & # Start the Vite client in the background
+
+      - name: Start the server
+        env:
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+        run: npm run start &  # Start the server in the background
+
+      - name: Run Cypress E2E tests
+        run: npx cypress run --e2e --headless # Run E2E tests in headless mode
         continue-on-error: true # Continue on in order to report failed tests
 
       # Save the downloadable reports artifact for any further investigation

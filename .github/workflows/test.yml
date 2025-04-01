@@ -48,15 +48,15 @@ jobs:
         continue-on-error: true # Continue on in order to report failed tests
 
       - name: Start the client
-        run: npm run client:dev & # Start the Vite client in the background
+        run: npm run client:dev &  # Background the client process
 
       - name: Start the server
         env:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-        run: npm run start &  # Start the server in the background
+        run: npm run start &  # Background the server process
 
       - name: Run Cypress E2E tests
-        run: npx cypress run --e2e --headless # Run E2E tests in headless mode
+        run: npx cypress run --e2e --headless
         continue-on-error: true # Continue on in order to report failed tests
 
       # Save the downloadable reports artifact for any further investigation
@@ -77,7 +77,7 @@ jobs:
           path: cypress/reports/e2e/mochawesome.json
 
       - name: Display Cypress component test Job Summary
-        # Show the summary for component tests even if tests fail
+        # Show the component test report even if tests fail
         if: always()
         run: |
           # Parse the component test report
@@ -93,7 +93,7 @@ jobs:
           # Format the duration (convert to seconds and round to 3 decimal places)
           COMPONENT_DURATION=$(echo "scale=3; $COMPONENT_DURATION / 1000" | bc)
 
-          # Write the component test results to the GitHub Actions job summary in a table format
+          # Write the component report summary to the GitHub Actions job summary in a table format
           echo "## Cypress Component Test Results" >> $GITHUB_STEP_SUMMARY
           echo "| Result  | Passed ✅ | Failed ❌ | Pending 🤚 | Skipped ↩️ | Duration 🕗 |" >> $GITHUB_STEP_SUMMARY
           echo "|---------|-----------|---------|---------|---------|------------|" >> $GITHUB_STEP_SUMMARY

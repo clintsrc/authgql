@@ -3,18 +3,20 @@ import viteConfig from "./vite.config";
 import path from "path";
 import { renameSync, mkdirSync, existsSync, readdirSync } from "fs";
 
-// Helper to get __dirname in an ES module context
+// To specify report paths later
 const getDirname = (importMetaUrl: string) => {
   return path.dirname(new URL(importMetaUrl).pathname);
 };
 
 export default defineConfig({
-  reporter: "cypress-mochawesome-reporter",
+  // Define a formattter for the reports.
+  // Mochawesome provides a polished HTML report, and it's compatible with Cypress.
+  reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
-    reportDir: "cypress/reports", // Set the base report directory
-    overwrite: false, // Do not overwrite the reports
-    json: true, // Generate JSON reports
-    html: false, // Do not generate HTML reports
+    reportDir: 'cypress/reports',
+    overwrite: false,
+    json: true,
+    html: false,
   },
 
   component: {
@@ -26,9 +28,10 @@ export default defineConfig({
     },
     setupNodeEvents(on, config) {
       on("after:run", () => {
-        const baseDir = getDirname(import.meta.url); // Use import.meta.url to get the current directory
-        const jsonDir = path.join(baseDir, "cypress/reports/.jsons"); // Actual JSON reports directory
-        const componentDir = path.join(baseDir, "cypress/reports/component"); // Target directory for component reports
+        const baseDir = getDirname(import.meta.url); // get cwd
+        const jsonDir = path.join(baseDir, "cypress/reports/.jsons");
+	// component reports
+        const componentDir = path.join(baseDir, "cypress/reports/component");
 
         // Ensure the component report directory exists
         if (!existsSync(componentDir)) {
@@ -56,6 +59,7 @@ export default defineConfig({
   },
 
   e2e: {
+    // baseUrl uses the frontend (vite) testing (dev mode only)
     baseUrl: "http://localhost:3000",
     setupNodeEvents(on, config) {
       on("after:run", () => {

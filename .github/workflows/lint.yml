@@ -17,12 +17,6 @@ on:
     branches:
       - "**"
 
-concurrency:
-  # Filtering on the current branch ref helps avoid concurrency
-  group: ${{ github.ref }}
-  # Cancel running lint jobs
-  cancel-in-progress: true
-
 jobs:
   lint:
     runs-on: ubuntu-latest
